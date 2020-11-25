@@ -12,9 +12,11 @@ class AddTreatForPet
     }
     public function handle($query, $next)
     {
-        $query->treats()->create([
-            'name' => $this->treat,
-        ]);
+        foreach($this->treat as $treat) {
+            $query->treats()->updateOrCreate([
+                'name' => $treat,
+            ]);
+        }
 
         return $next($query);
     }

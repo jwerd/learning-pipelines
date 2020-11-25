@@ -23,17 +23,29 @@ Route::get('/', function () {
                     'type' => 'Dog',
                     'name' => 'Rosie'
                 ]),
+                new \App\Pipelines\AddTreatForPet([
+                    'Bones',
+                    'Peanut Butter',
+                    'Garbage',
+                ]),
                 new \App\Pipelines\AddPetsPipeline([
                     'type' => 'Cat',
                     'name' => 'Luna'
+                ]),
+                new \App\Pipelines\AddTreatForPet([
+                    'Cat Food'
                 ]),
                 new \App\Pipelines\AddPetsPipeline([
                     'type' => 'Cat',
                     'name' => 'Bear'
                 ]),
+                new \App\Pipelines\AddTreatForPet([
+                    '9lives',
+                    'Tuna',
+                ]),
+                new \App\Pipelines\EndOfPipeline(),
             ])
-            ->thenReturn()
-            ->get();
-    dd($pets);
-    dump('all done');
+            ->thenReturn();
+    return response()->json($pets,200);
+    //dd($pets, $pets->treats);
 });

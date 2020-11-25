@@ -15,8 +15,8 @@ class AddPetsPipeline
 
     public function handle($query, $next)
     {
-        PetModel::updateOrCreate($this->pet);
+        $pet = PetModel::updateOrCreate($this->pet);
 
-        return $next($query);
+        return $next($pet);
     }
 }
